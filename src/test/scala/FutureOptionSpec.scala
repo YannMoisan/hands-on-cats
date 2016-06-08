@@ -1,8 +1,7 @@
 import org.specs2.concurrent.ExecutionEnv
 
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class FutureOptionSpec(implicit ee: ExecutionEnv) extends org.specs2.mutable.Specification {
   "flatMap on Future[Option[Int]]" >> {
