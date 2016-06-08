@@ -59,10 +59,12 @@ For each snippet, identify the boilerplate and refactor using scalaz. Here are s
 
 ## Validation
 
-- Hint : Validation
+- replace `Try` with `scalaz.Validation`
+- modify the test to match over a Validation
 
 ## Monoid
 
+- modify only the body, not the signature
 - Hint : Monoid (don't worry, it's such a pedantic word to say a type that you can merge).
 
 ```
@@ -73,15 +75,18 @@ trait Monoid[F]  { self =>
 
 ## Sequence
 
-- Hint : use Traverse to transform `F[G[A]]` into `G[F[A]]`
+- modify only the body, not the signature
+- Hint : use `Traverse` to transform `F[G[A]]` into `G[F[A]]`
 
 ## FutureOption
 
-- Hint : use OptionT, a tool to compose monads.
+- modify only the body, not the signature
+- Hint : use `OptionT`, a tool to compose monads.
 
 ## Reader
 
-- Hint : Reader
+- modify only the body, not the signature
+- Hint : use a Reader monad, to inject the dependency.
 
 # Some links
 
