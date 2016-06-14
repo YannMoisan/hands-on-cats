@@ -10,6 +10,15 @@ object Sequence {
     osa.map(_.reverse)
   }
 
+  def sequenceEither(s: Seq[Either[String, Int]]) : Either[String, Seq[Int]] = {
+    val z : Either[String, Seq[Int]] = Right(Seq[Int]())
 
+    val osa = s.foldLeft(z)((osa, oa) => for {
+      sa <- osa.right
+      a <- oa.right
+    } yield sa.+:(a)
+    )
+    osa.right.map(_.reverse)
+  }
 
 }
