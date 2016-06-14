@@ -71,6 +71,11 @@ For each snippet, identify the boilerplate and refactor using scalaz. Here are s
 - Step 1 : solve compilation issue
 - Step 2 : use scalaz
 
+## Either
+
+- replace `Either` with scalaz `\/`
+- modify the test to deal with `\/`
+
 ## Validation
 
 - replace `Try` with `scalaz.Validation`
