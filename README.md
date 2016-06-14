@@ -48,6 +48,20 @@ import scala.reflect.runtime.universe._
 res14: String = "Scalaz.ToShowOps(1)(Scalaz.intInstance).show"
 ```
 
+# Main symbols - thanks to [reactormonk](https://github.com/reactormonk)
+
+| Symbol  | Explanation             | Hint                                |
+|---------|-------------------------|-------------------------------------|
+| \/      | Right-leaning Either    | Split ways, go one way or the other |
+| -\/     | Left value of \/        | - is on the left side               |
+| \/-     | Right value  of \/      | - is on the right side              |
+| >>=     | flatMap                 | shove result into                   |
+| >>      | flatMap(_ => ..)        | shove into, but ignore the result   |
+| \|@\|   | Applicatives into Tuple | Scream operator                     |
+| \|+\|   | Append via Monoid       | + was taken                         |
+
+[List Of Symbols](https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.3.0-M2/scalaz_2.11-7.3.0-M2-javadoc.jar/!/index.html#index.index-_ )
+
 # Refactor
 
 For each snippet, identify the boilerplate and refactor using scalaz. Here are some hints if you need them.
