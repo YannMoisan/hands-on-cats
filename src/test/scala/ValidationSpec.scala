@@ -1,20 +1,37 @@
 import Validation.Person
+import ValidationScalaz.Person
 
 import scala.util.{Failure, Success}
+import scalaz.{Failure => ZFailure, NonEmptyList, Success => ZSuccess}
 
 class ValidationSpec extends org.specs2.mutable.Specification {
-  "The factory method" >> {
+  "[vanilla] The factory method" >> {
     "should instantiate a new person when all fields are correct" >> {
-      Person.apply("40", "toto") must beSuccessfulTry.withValue(Person(40, "toto"))
+      Validation.vanilla.Person.apply("40", "toto") must beSuccessfulTry.withValue(Validation.Person(40, "toto"))
     }
     "should return a failure when age is wrong" >> {
-      Person.apply("NaN", "toto") must beFailedTry.withThrowable[java.lang.NumberFormatException]("For input string: \"NaN\"")
+      Validation.vanilla.Person.apply("NaN", "toto") must beFailedTry.withThrowable[java.lang.NumberFormatException]("For input string: \"NaN\"")
     }
     "should return a failure when name is wrong" >> {
-      Person.apply("40", "toolonngggggg") must beFailedTry.withThrowable[java.lang.IllegalArgumentException]("name too long")
+      Validation.vanilla.Person.apply("40", "toolonngggggg") must beFailedTry.withThrowable[java.lang.IllegalArgumentException]("name too long")
     }
     "should return a failure (with errors accumulated) when all fields are wrong" >> {
-      Person.apply("NaN", "toolonngggggg") must beFailedTry.withThrowable[java.lang.IllegalArgumentException]("For input string: \"NaN\"name too long")
+      Validation.vanilla.Person.apply("NaN", "toolonngggggg") must beFailedTry.withThrowable[java.lang.IllegalArgumentException]("For input string: \"NaN\"name too long")
     }
   }
+  "[scalaz] The factory method" >> {
+    "should instantiate a new person when all fields are correct" >> {
+      Validation.scalaz.Person.apply("40", "toto") must_==ZSuccess(Validation.Person(40, "toto"))
+    }
+    "should return a failure when age is wrong" >> {
+      Validation.scalaz.Person.apply("NaN", "toto").leftMap(_.map(_.getMessage)) must_==ZFailure(NonEmptyList("For input string: \"NaN\""))
+    }
+    "should return a failure when name is wrong" >> {
+      Validation.scalaz.Person.apply("40", "toolonngggggg").leftMap(_.map(_.getMessage)) must_==ZFailure(NonEmptyList("name too long"))
+    }
+    "should return a failure (with errors accumulated) when all fields are wrong" >> {
+      Validation.scalaz.Person.apply("NaN", "toolonngggggg").leftMap(_.map(_.getMessage)) must_==ZFailure(NonEmptyList("For input string: \"NaN\"", "name too long"))
+    }
+  }
+
 }

@@ -1,5 +1,5 @@
 # Why
-[Scalaz](https://github.com/scalaz/scalaz) is to Scala what Guava is to Java : a must known library ! But unfortunately, learning scalaz is not so easy.
+[Scalaz](https://github.com/scalaz/scalaz) is to Scala what Guava is to Java : a must to know library ! But unfortunately, learning scalaz is not so easy.
 
 
 This hand's on focuses on concrete use cases instead of complex theory. The goal is to show that you can use scalaz to
@@ -48,7 +48,7 @@ import scala.reflect.runtime.universe._
 res14: String = "Scalaz.ToShowOps(1)(Scalaz.intInstance).show"
 ```
 
-# Main symbols - thanks to [reactormonk](https://github.com/reactormonk)
+# Main symbols - thanks to [reactormonk](https://gist.github.com/reactormonk/8bba396887cfa4d202c62761a1084ab5)
 
 | Symbol  | Explanation             | Hint                                |
 |---------|-------------------------|-------------------------------------|
@@ -64,7 +64,9 @@ res14: String = "Scalaz.ToShowOps(1)(Scalaz.intInstance).show"
 
 # Refactor
 
-For each snippet, identify the boilerplate and refactor using scalaz. Here are some hints if you need them.
+For each snippet, identify the boilerplate and refactor using scalaz. Your mission, if you accept it, is to implement methods marked as todo. All the tests are provided, no need to modify them. When done, the tests should pass.
+
+Here are some hints if you need them.
 
 ## Simple
 
@@ -74,16 +76,13 @@ For each snippet, identify the boilerplate and refactor using scalaz. Here are s
 ## Either
 
 - replace `Either` with scalaz `\/`
-- modify the test to deal with `\/`
 
 ## Validation
 
 - replace `Try` with `scalaz.Validation`
-- modify the test to match over a Validation
 
 ## Monoid
 
-- modify only the body, not the signature
 - Hint : Monoid (don't worry, it's such a pedantic word to say a type that you can merge).
 
 ```
@@ -94,17 +93,14 @@ trait Monoid[F]  { self =>
 
 ## Sequence
 
-- modify only the body, not the signature
 - Hint : use `Traverse` to transform `F[G[A]]` into `G[F[A]]`
 
 ## FutureOption
 
-- modify only the body, not the signature
 - Hint : use `OptionT`, a tool to compose monads.
 
 ## Reader
 
-- modify only the body, not the signature
 - Hint : use a Reader monad, to inject the dependency.
 
 # Some links

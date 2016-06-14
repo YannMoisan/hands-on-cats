@@ -2,9 +2,14 @@ import Reader.Dao
 import org.specs2.mutable.Specification
 
 class ReaderSpec extends Specification {
-  "The service aggregates the result of 3 services" >> {
+  "[vanilla] The service aggregates the result of 3 services" >> {
     "when a dao is injected" >> {
-      Reader.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+      Reader.vanilla.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+    }
+  }
+  "[scalaz] The service aggregates the result of 3 services" >> {
+    "when a dao is injected" >> {
+      Reader.scalaz.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
     }
   }
 }
