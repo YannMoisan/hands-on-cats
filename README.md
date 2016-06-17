@@ -5,7 +5,7 @@
 This hand's on focuses on concrete use cases instead of complex theory. The goal is to show that you can use scalaz to
 improve your code and remove some boilerplate.
 
-I've chosen some pieces of code that can benefit from scalaz. For each, a test suite will help you tu understand what the code do, and test your refactored code
+I've chosen some pieces of code that can benefit from scalaz. For each, a test suite will help you understand what the code does.
 
 # Read the specifications
 
@@ -15,9 +15,9 @@ sbt test
 
 # Prepare your project
 
-We will use Scalaz 7.1, because it's the version that you depends on with Play 2.4/2.5
+Scalaz 7.1 is used, because it's the version that you depend on with Play 2.4/2.5
 
-- add the dependency in build.sbt
+- add the dependency in `build.sbt`
 
 ```
 libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.5"
@@ -39,7 +39,7 @@ import Scalaz._
 final def show: scalaz.Cord
 ```
 
-- If you want to find the source of an implicit conversion, use the following
+- If you want to find the source of an implicit conversion, use the following code
 
 ```
 @ import scala.reflect.runtime.universe._
@@ -62,9 +62,9 @@ res14: String = "Scalaz.ToShowOps(1)(Scalaz.intInstance).show"
 
 [List Of Symbols](https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.3.0-M2/scalaz_2.11-7.3.0-M2-javadoc.jar/!/index.html#index.index-_ )
 
-# Refactor
+# Refactor using Scalaz
 
-For each snippet, identify the boilerplate and refactor using scalaz. Your mission, if you accept it, is to implement methods marked as todo. All the tests are provided, no need to modify them. When done, the tests should pass.
+Your mission, if you accept it, is to implement all methods marked as todo using Scalaz. All the unit tests are provided and you don't need to modify them. When your implementation will be correct, the tests will pass.
 
 Here are some hints if you need them.
 
@@ -97,7 +97,7 @@ trait Monoid[F]  { self =>
 
 ## FutureOption
 
-- Hint : use `OptionT`, a tool to compose monads.
+- Hint : use `OptionT`, a tool for composing monads.
 
 ## Reader
 
