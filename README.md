@@ -81,6 +81,10 @@ Here are some hints if you need them.
 - Step 1 : solve compilation issue
 - Step 2 : use scalaz
 
+## TypeSafe
+
+- replace `case class` with scalaz `Tag`
+
 ## Either
 
 - replace `Either` with scalaz `\/`
