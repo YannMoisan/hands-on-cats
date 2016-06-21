@@ -1,4 +1,5 @@
 import scalaz._
+import cats.data.{Reader=>CReader}
 
 object Reader {
   trait Dao { def name = "Ahoy" }
@@ -25,4 +26,13 @@ object Reader {
 
     def service(dao: Dao): Seq[String] = sys.error("todo")
   }
+
+  object cats {
+    def service1: CReader[Dao, String] = sys.error("todo")
+    def service2: CReader[Dao, String] = sys.error("todo")
+    def service3: CReader[Dao, String] = sys.error("todo")
+
+    def service(dao: Dao): Seq[String] = sys.error("todo")
+  }
+
 }

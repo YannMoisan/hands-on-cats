@@ -1,3 +1,5 @@
+import cats.data.ValidatedNel
+
 import scala.util.{Failure, Success, Try}
 import scalaz._
 
@@ -41,6 +43,19 @@ object Validation {
       def validateAge(s: String): ValidationNel[Throwable, Int] = sys.error("todo")
 
       def validateName(s: String): ValidationNel[Throwable, String] = sys.error("todo")
+
+    }
+
+  }
+
+  object cats {
+
+    object Person {
+      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = sys.error("todo")
+
+      def validateAge(s: String): ValidatedNel[Throwable, Int] = sys.error("todo")
+
+      def validateName(s: String): ValidatedNel[Throwable, String] = sys.error("todo")
 
     }
 

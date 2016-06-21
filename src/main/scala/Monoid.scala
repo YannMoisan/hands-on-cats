@@ -16,4 +16,11 @@ object Monoid {
 
     def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = sys.error("todo")
   }
+
+  object cats {
+    def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = sys.error("todo")
+
+    def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = sys.error("todo")
+  }
+
 }

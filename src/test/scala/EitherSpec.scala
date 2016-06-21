@@ -1,4 +1,5 @@
 import scalaz.{-\/, \/-}
+import cats.data.Xor
 
 class EitherSpec extends org.specs2.mutable.Specification {
   "[vanilla] flatMap two either" >> {
@@ -29,4 +30,20 @@ class EitherSpec extends org.specs2.mutable.Specification {
       Either.scalaz.flatMap(\/-(1), \/-(2)) must_== \/-(3)
     }
   }
+
+  "[cats] flatMap two either" >> {
+    "should work with Left/Left" >> {
+      Either.cats.flatMap(cats.data.Xor.Left("error 1"), cats.data.Xor.Left("error 2")) must_== cats.data.Xor.Left("error 1")
+    }
+    "should work with Left/Right" >> {
+      Either.cats.flatMap(cats.data.Xor.Left("error 1"), cats.data.Xor.Right(2)) must_== cats.data.Xor.Left("error 1")
+    }
+    "should work with Right/Left" >> {
+      Either.cats.flatMap(cats.data.Xor.Right(1), cats.data.Xor.Left("error 2")) must_== cats.data.Xor.Left("error 2")
+    }
+    "should work with Right/Right" >> {
+      Either.cats.flatMap(cats.data.Xor.Right(1), cats.data.Xor.Right(2)) must_== cats.data.Xor.Right(3)
+    }
+  }
+
 }
