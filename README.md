@@ -57,9 +57,9 @@ res14: String = "Scalaz.ToShowOps(1)(Scalaz.intInstance).show"
 | `\/-`   | Right value  of `\/`      | - is on the right side              |
 | `>>=`   | `flatMap`                 | shove result into                   |
 | `>>`    | `flatMap(_ => ..)`        | shove into, but ignore the result   |
-| `\|@\|` | Applicatives into Tuple | Scream operator                     |
-| `\|+\|` | Append via Monoid       | + was taken                         |
-| `>|`    | `fa.map(_ => b)` | Ignore the content and use a new value |
+| `|@|` | Applicatives into Tuple | Scream operator                     |
+| `|+|` | Append via Monoid       | + was taken                         |
+| `>|`    | `fa.map(_ => b)` | Ignore the content and use a new value. Equivalent to `fa.as(b)` |
 | `*>`    | `fa.flatMap(_ => fb)` | Do both effects, left to right, use right value |
 | `<*`    | `fa.flatMap(a => fb.map(_ => a))` | Do both effects, left to right, use left value |
 | `<=<`   | Alias for `compose` | Left fish |
