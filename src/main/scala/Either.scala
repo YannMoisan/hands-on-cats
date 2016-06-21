@@ -1,4 +1,5 @@
 import scalaz.\/
+import cats.data.Xor
 
 object Either {
   object vanilla {
@@ -11,5 +12,9 @@ object Either {
 
   object scalaz {
     def flatMap(e1 : \/[String, Int], e2: \/[String, Int]) : \/[String, Int] = sys.error("todo")
+  }
+
+  object cats {
+    def flatMap(e1: Xor[String, Int], e2: Xor[String, Int]): Xor[String, Int] = sys.error("todo")
   }
 }
