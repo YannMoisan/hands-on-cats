@@ -1,3 +1,6 @@
+import scalaz._
+import Scalaz._
+
 object Monoid {
   object vanilla {
     def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = {
@@ -12,8 +15,8 @@ object Monoid {
   }
 
   object scalaz {
-    def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = sys.error("todo")
+    def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = m1 |+| m2
 
-    def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = sys.error("todo")
+    def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = m1 |+| m2
   }
 }

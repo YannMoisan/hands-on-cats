@@ -27,13 +27,13 @@ object TypeSafe {
     trait User
     trait Project
 
-    def UserId(a: String): String @@ User = sys.error("todo")
-    def ProjectId(a: String): String @@ Project = sys.error("todo")
+    def UserId(a: String): String @@ User = Tag[String, User](a)
+    def ProjectId(a: String): String @@ Project = Tag[String, Project](a)
 
     val userId = UserId("1")
     val projectId = ProjectId("2")
 
-    def f(userId: String @@ User, projectId: String @@ Project) : String = sys.error("todo")
+    def f(userId: String @@ User, projectId: String @@ Project) : String = Tag.unwrap(userId) + Tag.unwrap(projectId)
     // as expected, the following line doesn't compile
     // f(projectId, userId)
   }

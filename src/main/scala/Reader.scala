@@ -1,4 +1,5 @@
-import scalaz._
+import scalaz.{Reader => R, _}
+import Scalaz._
 
 object Reader {
   trait Dao { def name = "Ahoy" }
@@ -19,10 +20,15 @@ object Reader {
   }
 
   object scalaz {
-    def service1: Reader[Dao, String] = sys.error("todo")
-    def service2: Reader[Dao, String] = sys.error("todo")
-    def service3: Reader[Dao, String] = sys.error("todo")
+    def service1: R[Dao, String] = R { _.name }
+    def service2: R[Dao, String] = R { _.name }
+    def service3: R[Dao, String] = R { _.name }
 
-    def service(dao: Dao): Seq[String] = sys.error("todo")
+    def service(dao: Dao): Seq[String] =
+      (for {
+        i1 <- service1
+        i2 <- service2
+        i3 <- service3
+      } yield Seq(i1, i2, i3)).run(new Dao(){})
   }
 }
