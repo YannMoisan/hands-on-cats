@@ -1,6 +1,6 @@
-import TypeSafe._
+import Ex2_TypeSafe._
 
-class TypeSafeSpec extends org.specs2.mutable.Specification {
+class Ex2_TypeSafeSpec extends org.specs2.mutable.Specification {
   "[vanilla]" >> {
     "should merge id" >> {
       vanilla.f(vanilla.UserId("1"), vanilla.ProjectId("2")) must_== "12"
