@@ -1,3 +1,5 @@
+import cats.data.ValidatedNel
+
 import scala.util.{Failure, Success, Try}
 import scalaz.{Validation => V, _}
 import Scalaz._
@@ -44,6 +46,19 @@ object Validation {
       def validateAge(s: String): ValidationNel[Throwable, Int] = V.fromTryCatchNonFatal(s.toInt).toValidationNel
 
       def validateName(s: String): ValidationNel[Throwable, String] = if (s.length > 10) new IllegalArgumentException("name too long").failureNel else s.successNel
+
+    }
+
+  }
+
+  object cats {
+
+    object Person {
+      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = sys.error("todo")
+
+      def validateAge(s: String): ValidatedNel[Throwable, Int] = sys.error("todo")
+
+      def validateName(s: String): ValidatedNel[Throwable, String] = sys.error("todo")
 
     }
 

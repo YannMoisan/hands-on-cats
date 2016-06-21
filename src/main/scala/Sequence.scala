@@ -1,5 +1,8 @@
 import scalaz._
 import Scalaz._
+import scalaz.Scalaz
+
+import cats.syntax.traverse._
 
 object Sequence {
 
@@ -38,4 +41,11 @@ object Sequence {
     //  [error]     def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequence
     def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequenceU
   }
+
+  object cats {
+    def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
+
+    def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequenceU
+  }
+
 }

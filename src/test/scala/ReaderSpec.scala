@@ -12,4 +12,9 @@ class ReaderSpec extends Specification {
       Reader.scalaz.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
     }
   }
+  "[cats] The service aggregates the result of 3 services" >> {
+    "when a dao is injected" >> {
+      Reader.cats.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+    }
+  }
 }

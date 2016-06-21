@@ -30,4 +30,8 @@ object FutureOption {
       } yield i1 + i2).run
   }
 
+  object cats {
+    def flatMap(fo1: Future[Option[Int]], fo2: Future[Option[Int]]): Future[Option[Int]] = sys.error("todo")
+  }
+
 }

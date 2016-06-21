@@ -54,6 +54,14 @@ class MonoidSpec extends org.specs2.mutable.Specification {
       Monoid.scalaz.mergeEx2(dict1, dict2) must_== dictMerged
     }
   }
-
-
+  "[cats] merge two maps of Int" >> {
+    "should work when maps don't contains same keys" >> {
+      Monoid.cats.merge(transactions1, transactions2) must_== transactionsMerged
+    }
+  }
+  "[cats] merge two dictionaries : maps of List[String]" >> {
+    "should work when maps don't contains same keys" >> {
+      Monoid.cats.mergeEx2(dict1, dict2) must_== dictMerged
+    }
+  }
 }
