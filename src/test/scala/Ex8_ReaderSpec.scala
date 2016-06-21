@@ -1,15 +1,15 @@
-import Reader.Dao
+import Ex8_Reader.Dao
 import org.specs2.mutable.Specification
 
-class ReaderSpec extends Specification {
+class Ex8_ReaderSpec extends Specification {
   "[vanilla] The service aggregates the result of 3 services" >> {
     "when a dao is injected" >> {
-      Reader.vanilla.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+      Ex8_Reader.vanilla.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
     }
   }
   "[scalaz] The service aggregates the result of 3 services" >> {
     "when a dao is injected" >> {
-      Reader.scalaz.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+      Ex8_Reader.scalaz.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
     }
   }
 }

@@ -1,7 +1,6 @@
-import scalaz.{Reader => R, _}
-import Scalaz._
+import scalaz._, Scalaz._
 
-object Reader {
+object Ex8_Reader {
   trait Dao { def name = "Ahoy" }
 
   object vanilla {
@@ -20,9 +19,9 @@ object Reader {
   }
 
   object scalaz {
-    def service1: R[Dao, String] = R { _.name }
-    def service2: R[Dao, String] = R { _.name }
-    def service3: R[Dao, String] = R { _.name }
+    def service1: Reader[Dao, String] = Reader { _.name }
+    def service2: Reader[Dao, String] = Reader { _.name }
+    def service3: Reader[Dao, String] = Reader { _.name }
 
     def service(dao: Dao): Seq[String] =
       (for {

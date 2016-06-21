@@ -1,7 +1,8 @@
 import scalaz._
 import Scalaz._
 
-object Monoid {
+object Ex5_Monoid {
+
   object vanilla {
     def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = {
       val keys = m1.keys ++ m2.keys
@@ -19,4 +20,5 @@ object Monoid {
 
     def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = m1 |+| m2
   }
+
 }
