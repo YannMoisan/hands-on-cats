@@ -1,4 +1,4 @@
-object Simple {
+object Ex1_Simple {
   def test[A](a1: A)(a2: A) = println((a1, a2))
 
   // Fix the compilation issue

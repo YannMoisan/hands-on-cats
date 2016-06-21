@@ -1,6 +1,6 @@
 import scalaz._
 
-object Reader {
+object Ex8_Reader {
   trait Dao { def name = "Ahoy" }
 
   object vanilla {
