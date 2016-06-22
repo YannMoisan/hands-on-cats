@@ -1,4 +1,4 @@
-class Ex5_MonoidSpec extends org.specs2.mutable.Specification {
+class Ex_MonoidSpec extends org.specs2.mutable.Specification {
 
   val transactions1 = Map(
     "Account 1" -> 10,
@@ -36,22 +36,22 @@ class Ex5_MonoidSpec extends org.specs2.mutable.Specification {
 
   "[vanilla] merge two maps of Int" >> {
     "should work when maps don't contains same keys" >> {
-      Ex5_Monoid.vanilla.merge(transactions1, transactions2) must_== transactionsMerged
+      Ex_Monoid.vanilla.merge(transactions1, transactions2) must_== transactionsMerged
     }
   }
   "[vanilla] merge two dictionaries : maps of List[String]" >> {
     "should work when maps don't contains same keys" >> {
-      Ex5_Monoid.vanilla.mergeEx2(dict1, dict2) must_== dictMerged
+      Ex_Monoid.vanilla.mergeEx2(dict1, dict2) must_== dictMerged
     }
   }
   "[scalaz] merge two maps of Int" >> {
     "should work when maps don't contains same keys" >> {
-      Ex5_Monoid.scalaz.merge(transactions1, transactions2) must_== transactionsMerged
+      Ex_Monoid.scalaz.merge(transactions1, transactions2) must_== transactionsMerged
     }
   }
   "[scalaz] merge two dictionaries : maps of List[String]" >> {
     "should work when maps don't contains same keys" >> {
-      Ex5_Monoid.scalaz.mergeEx2(dict1, dict2) must_== dictMerged
+      Ex_Monoid.scalaz.mergeEx2(dict1, dict2) must_== dictMerged
     }
   }
 
