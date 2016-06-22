@@ -1,8 +1,4 @@
-import cats.data.ValidatedNel
-
 import scala.util.{Failure, Success, Try}
-import scalaz.{Validation => V, _}
-import Scalaz._
 
 object Validation {
 
@@ -38,6 +34,9 @@ object Validation {
 
   object scalaz {
 
+    import _root_.scalaz.{Validation => V, _}
+    import Scalaz._
+
     object Person {
       def apply(age: String, name: String): ValidationNel[Throwable, Person] = (validateAge(age) |@| validateName(name)) {
         Validation.Person.apply
@@ -46,22 +45,25 @@ object Validation {
       def validateAge(s: String): ValidationNel[Throwable, Int] = V.fromTryCatchNonFatal(s.toInt).toValidationNel
 
       def validateName(s: String): ValidationNel[Throwable, String] = if (s.length > 10) new IllegalArgumentException("name too long").failureNel else s.successNel
-
     }
-
   }
 
   object cats {
+    import _root_.cats.data.Validated.{Invalid, Valid}
+    import _root_.cats.data.{Validated, ValidatedNel}
+    import _root_.cats.Apply
+    import _root_.cats.std.list._
 
     object Person {
-      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = sys.error("todo")
+      // todo : value |@| is not a member of cats.data.ValidatedNel[Throwable,Int]
+      def apply(age: String, name: String): ValidatedNel[Throwable, Person] =
+        Apply[({type L[X] = ValidatedNel[Throwable, X]})#L].map2(validateAge(age), validateName(name)) {
+          (age, name) => Validation.Person(age, name)
+        }
 
-      def validateAge(s: String): ValidatedNel[Throwable, Int] = sys.error("todo")
+      def validateAge(s: String): ValidatedNel[Throwable, Int] = Validated.catchNonFatal(s.toInt).toValidatedNel
 
-      def validateName(s: String): ValidatedNel[Throwable, String] = sys.error("todo")
-
+      def validateName(s: String): ValidatedNel[Throwable, String] = if (s.length > 10) Invalid(new IllegalArgumentException("name too long")).toValidatedNel else Valid(s).toValidatedNel
     }
-
   }
-
 }

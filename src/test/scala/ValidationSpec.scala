@@ -40,13 +40,13 @@ class ValidationSpec extends org.specs2.mutable.Specification {
       Validation.cats.Person.apply("40", "toto") must_== Valid(Validation.Person(40, "toto"))
     }
     "should return a failure when age is wrong" >> {
-      Validation.cats.Person.apply("NaN", "toto").leftMap(_.map(_.getMessage)) must_== Invalid(NonEmptyList("For input string: \"NaN\""))
+      Validation.cats.Person.apply("NaN", "toto").leftMap(_.map(_.getMessage)) must_== Invalid(cats.data.NonEmptyList("For input string: \"NaN\""))
     }
     "should return a failure when name is wrong" >> {
-      Validation.cats.Person.apply("40", "toolonngggggg").leftMap(_.map(_.getMessage)) must_== Invalid(NonEmptyList("name too long"))
+      Validation.cats.Person.apply("40", "toolonngggggg").leftMap(_.map(_.getMessage)) must_== Invalid(cats.data.NonEmptyList("name too long"))
     }
     "should return a failure (with errors accumulated) when all fields are wrong" >> {
-      Validation.cats.Person.apply("NaN", "toolonngggggg").leftMap(_.map(_.getMessage)) must_== Invalid(NonEmptyList("For input string: \"NaN\"", "name too long"))
+      Validation.cats.Person.apply("NaN", "toolonngggggg").leftMap(_.map(_.getMessage)) must_== Invalid(cats.data.NonEmptyList("For input string: \"NaN\"", "name too long"))
     }
   }
 
