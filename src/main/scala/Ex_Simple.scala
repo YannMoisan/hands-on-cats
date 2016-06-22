@@ -1,7 +1,7 @@
 import scalaz._
 import Scalaz._
 
-object Ex1_Simple {
+object Ex_Simple {
 
   def test[A](a1: A)(a2: A) = println((a1, a2))
 

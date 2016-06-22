@@ -2,21 +2,21 @@ import scala.util.{Failure, Success, Try}
 import scalaz.{Validation => V, _}
 import Scalaz._
 
-object Ex4_Validation {
+object Ex_Validation {
 
   case class Person(age: Int, name: String)
 
   object vanilla {
 
     object Person {
-      def apply(age: String, name: String): Try[Ex4_Validation.Person] = {
+      def apply(age: String, name: String): Try[Ex_Validation.Person] = {
         val tryAge = validateAge(age)
         val tryName = validateName(name)
 
         tryAge match {
           case Success(age) =>
             tryName match {
-              case Success(name) => Success(Ex4_Validation.Person(age, name))
+              case Success(name) => Success(Ex_Validation.Person(age, name))
               case Failure(e2) => Failure(e2)
             }
           case Failure(e1) =>
@@ -38,7 +38,7 @@ object Ex4_Validation {
 
     object Person {
       def apply(age: String, name: String): ValidationNel[Throwable, Person] = (validateAge(age) |@| validateName(name)) {
-        Ex4_Validation.Person.apply
+        Ex_Validation.Person.apply
       }
 
       def validateAge(s: String): ValidationNel[Throwable, Int] = V.fromTryCatchNonFatal(s.toInt).toValidationNel

@@ -5,7 +5,7 @@ import scalaz.OptionT
 import scalaz.std.scalaFuture._
 
 
-object Ex7_FutureOption {
+object Ex_FutureOption {
   // def findAmountById(id: String) : Future[Option[Int]]
 
   object vanilla {

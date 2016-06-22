@@ -1,6 +1,6 @@
 import scalaz.\/
 
-object Ex3_Either {
+object Ex_Either {
   object vanilla {
     def flatMap(e1: Either[String, Int], e2: Either[String, Int]): Either[String, Int] =
       for {

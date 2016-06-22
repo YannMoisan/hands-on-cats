@@ -1,7 +1,7 @@
 import scalaz._
 import Scalaz._
 
-object Ex5_Monoid {
+object Ex_Monoid {
 
   object vanilla {
     def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = {
