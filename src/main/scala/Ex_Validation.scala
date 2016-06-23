@@ -1,20 +1,20 @@
 import scala.util.{Failure, Success, Try}
 
-object Validation {
+object Ex_Validation {
 
   case class Person(age: Int, name: String)
 
   object vanilla {
 
     object Person {
-      def apply(age: String, name: String): Try[Validation.Person] = {
+      def apply(age: String, name: String): Try[Ex_Validation.Person] = {
         val tryAge = validateAge(age)
         val tryName = validateName(name)
 
         tryAge match {
           case Success(age) =>
             tryName match {
-              case Success(name) => Success(Validation.Person(age, name))
+              case Success(name) => Success(Ex_Validation.Person(age, name))
               case Failure(e2) => Failure(e2)
             }
           case Failure(e1) =>
@@ -39,7 +39,7 @@ object Validation {
 
     object Person {
       def apply(age: String, name: String): ValidationNel[Throwable, Person] = (validateAge(age) |@| validateName(name)) {
-        Validation.Person.apply
+        Ex_Validation.Person.apply
       }
 
       def validateAge(s: String): ValidationNel[Throwable, Int] = V.fromTryCatchNonFatal(s.toInt).toValidationNel
@@ -58,7 +58,7 @@ object Validation {
       // todo : value |@| is not a member of cats.data.ValidatedNel[Throwable,Int]
       def apply(age: String, name: String): ValidatedNel[Throwable, Person] =
         Apply[({type L[X] = ValidatedNel[Throwable, X]})#L].map2(validateAge(age), validateName(name)) {
-          (age, name) => Validation.Person(age, name)
+          (age, name) => Ex_Validation.Person(age, name)
         }
 
       def validateAge(s: String): ValidatedNel[Throwable, Int] = Validated.catchNonFatal(s.toInt).toValidatedNel

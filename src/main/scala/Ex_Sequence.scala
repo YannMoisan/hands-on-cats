@@ -1,12 +1,10 @@
-import scalaz._
-import Scalaz._
 import scalaz.Scalaz
 
-import cats.syntax.traverse._
-
-object Sequence {
+object Ex_Sequence {
 
   object vanilla {
+    import scalaz._, Scalaz._
+
     def sequence(s: Seq[Option[Int]]): Option[Seq[Int]] = {
       val z: Option[Seq[Int]] = Some(Seq[Int]())
 
@@ -31,6 +29,8 @@ object Sequence {
   }
 
   object scalaz {
+    import scalaz._, Scalaz._
+
     def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
 
     // Trick : sequenceU (for Unapply) is needed in replacement of sequence to help the compiler
@@ -43,6 +43,8 @@ object Sequence {
   }
 
   object cats {
+    import _root_.cats.implicits._
+
     def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
 
     def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequenceU
