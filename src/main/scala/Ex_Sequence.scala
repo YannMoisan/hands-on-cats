@@ -1,10 +1,8 @@
 import scalaz._
-import Scalaz._
 import scalaz.Scalaz
 
 import cats.syntax.traverse._
-
-object Sequence {
+object Ex_Sequence {
 
   object vanilla {
     def sequence(s: Seq[Option[Int]]): Option[Seq[Int]] = {

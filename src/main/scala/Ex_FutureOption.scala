@@ -3,7 +3,7 @@ import scala.concurrent.Future
 import scalaz.OptionT
 
 
-object FutureOption {
+object Ex_FutureOption {
   // def findAmountById(id: String) : Future[Option[Int]]
 
   object vanilla {
