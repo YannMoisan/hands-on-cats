@@ -1,6 +1,6 @@
 import scalaz.{@@, Tag}
 
-object TypeSafe {
+object Ex_TypeSafe {
   object unsafe {
     val userId = "1"
     val projectId = "2"
