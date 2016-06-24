@@ -30,7 +30,7 @@ object Reader {
         i1 <- service1
         i2 <- service2
         i3 <- service3
-      } yield Seq(i1, i2, i3)).run(new Dao(){})
+      } yield Seq(i1, i2, i3)).run(dao)
   }
 
   object cats {
@@ -43,7 +43,7 @@ object Reader {
         i1 <- service1
         i2 <- service2
         i3 <- service3
-      } yield Seq(i1, i2, i3)).run(new Dao(){})
+      } yield Seq(i1, i2, i3)).run(dao)
   }
 
 }
