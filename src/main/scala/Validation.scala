@@ -49,12 +49,12 @@ object Validation {
   }
 
   object cats {
-    import _root_.cats.data.{Validated, ValidatedNel}
+    import _root_.cats.data.ValidatedNel
     import _root_.cats.data.Validated._
     import _root_.cats.implicits._
 
     object Person {
-      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = (validateAge(age) |@| validateName(name)).map (Validation.Person.apply)
+      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = (validateAge(age) |@| validateName(name)).map(Validation.Person.apply)
 
       def validateAge(s: String): ValidatedNel[Throwable, Int] = catchNonFatal(s.toInt).toValidatedNel
 
