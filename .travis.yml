@@ -1,0 +1,4 @@
+language: scala
+branches:
+  only:
+    - solutions
