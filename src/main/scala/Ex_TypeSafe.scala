@@ -1,5 +1,3 @@
-import scalaz.{@@, Tag}
-
 object Ex_TypeSafe {
   object unsafe {
     val userId = "1"
@@ -23,7 +21,9 @@ object Ex_TypeSafe {
     // f(projectId, userId)
   }
 
-  object scalaz {
+  object _scalaz {
+    import scalaz.@@
+
     trait User
     trait Project
 

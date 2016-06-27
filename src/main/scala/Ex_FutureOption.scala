@@ -18,11 +18,11 @@ object Ex_FutureOption {
     }
   }
 
-  object scalaz {
+  object _scalaz {
     def flatMap(fo1: Future[Option[Int]], fo2: Future[Option[Int]]): Future[Option[Int]] = sys.error("todo")
   }
 
-  object cats {
+  object _cats {
     def flatMap(fo1: Future[Option[Int]], fo2: Future[Option[Int]]): Future[Option[Int]] = sys.error("todo")
   }
 
