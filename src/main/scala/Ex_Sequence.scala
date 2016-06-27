@@ -1,10 +1,6 @@
-import scalaz.Scalaz
-
 object Ex_Sequence {
 
   object vanilla {
-    import scalaz._, Scalaz._
-
     def sequence(s: Seq[Option[Int]]): Option[Seq[Int]] = {
       val z: Option[Seq[Int]] = Some(Seq[Int]())
 
@@ -28,8 +24,9 @@ object Ex_Sequence {
     }
   }
 
-  object scalaz {
-    import scalaz._, Scalaz._
+  object _scalaz {
+    import scalaz._
+    import Scalaz._
 
     def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
 
@@ -42,8 +39,8 @@ object Ex_Sequence {
     def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequenceU
   }
 
-  object cats {
-    import _root_.cats.implicits._
+  object _cats {
+    import cats.implicits._
 
     def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
 

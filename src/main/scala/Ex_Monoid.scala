@@ -11,8 +11,8 @@ object Ex_Monoid {
     }
   }
 
-  object scalaz {
-    import _root_.scalaz._
+  object _scalaz {
+    import scalaz._
     import Scalaz._
 
     def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = m1 |+| m2
@@ -20,9 +20,9 @@ object Ex_Monoid {
     def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = m1 |+| m2
   }
 
-  object cats {
-    import _root_.cats._
-    import _root_.cats.implicits._
+  object _cats {
+    import cats._
+    import cats.implicits._
 
     def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = m1 |+| m2
 

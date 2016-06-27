@@ -1,6 +1,3 @@
-import scalaz.\/
-import cats.data.Xor
-
 object Ex_Either {
   object vanilla {
     def flatMap(e1: Either[String, Int], e2: Either[String, Int]): Either[String, Int] =
@@ -10,7 +7,8 @@ object Ex_Either {
       } yield v1 + v2
   }
 
-  object scalaz {
+  object _scalaz {
+    import scalaz.\/
     def flatMap(e1 : \/[String, Int], e2: \/[String, Int]) : \/[String, Int] =
       for {
         v1 <- e1
@@ -18,7 +16,8 @@ object Ex_Either {
       } yield v1 + v2
   }
 
-  object cats {
+  object _cats {
+    import cats.data.Xor
     def flatMap(e1: Xor[String, Int], e2: Xor[String, Int]): Xor[String, Int] =
       for {
         v1 <- e1

@@ -32,9 +32,9 @@ object Ex_Validation {
     def validateName(s: String): Try[String] = if (s.length > 10) Failure(new IllegalArgumentException("name too long")) else Success(s)
   }
 
-  object scalaz {
+  object _scalaz {
 
-    import _root_.scalaz.{Validation => V, _}
+    import scalaz.{Validation => V, _}
     import Scalaz._
 
     object Person {
@@ -48,10 +48,10 @@ object Ex_Validation {
     }
   }
 
-  object cats {
-    import _root_.cats.data.ValidatedNel
-    import _root_.cats.data.Validated._
-    import _root_.cats.implicits._
+  object _cats {
+    import cats.data.ValidatedNel
+    import cats.data.Validated._
+    import cats.implicits._
 
     object Person {
       def apply(age: String, name: String): ValidatedNel[Throwable, Person] = (validateAge(age) |@| validateName(name)).map(Ex_Validation.Person.apply)

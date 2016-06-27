@@ -9,12 +9,12 @@ class Ex_ReaderSpec extends Specification {
   }
   "[scalaz] The service aggregates the result of 3 services" >> {
     "when a dao is injected" >> {
-      Ex_Reader.scalaz.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+      Ex_Reader._scalaz.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
     }
   }
   "[cats] The service aggregates the result of 3 services" >> {
     "when a dao is injected" >> {
-      Ex_Reader.cats.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
+      Ex_Reader._cats.service(new Dao(){}) must_== List("Ahoy", "Ahoy", "Ahoy")
     }
   }
 }
