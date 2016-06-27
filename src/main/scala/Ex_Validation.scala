@@ -49,21 +49,16 @@ object Ex_Validation {
   }
 
   object cats {
-    import _root_.cats.data.Validated.{Invalid, Valid}
-    import _root_.cats.data.{Validated, ValidatedNel}
-    import _root_.cats.Apply
-    import _root_.cats.std.list._
+    import _root_.cats.data.ValidatedNel
+    import _root_.cats.data.Validated._
+    import _root_.cats.implicits._
 
     object Person {
-      // todo : value |@| is not a member of cats.data.ValidatedNel[Throwable,Int]
-      def apply(age: String, name: String): ValidatedNel[Throwable, Person] =
-        Apply[({type L[X] = ValidatedNel[Throwable, X]})#L].map2(validateAge(age), validateName(name)) {
-          (age, name) => Ex_Validation.Person(age, name)
-        }
+      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = (validateAge(age) |@| validateName(name)).map(Ex_Validation.Person.apply)
 
-      def validateAge(s: String): ValidatedNel[Throwable, Int] = Validated.catchNonFatal(s.toInt).toValidatedNel
+      def validateAge(s: String): ValidatedNel[Throwable, Int] = catchNonFatal(s.toInt).toValidatedNel
 
-      def validateName(s: String): ValidatedNel[Throwable, String] = if (s.length > 10) Invalid(new IllegalArgumentException("name too long")).toValidatedNel else Valid(s).toValidatedNel
+      def validateName(s: String): ValidatedNel[Throwable, String] = if (s.length > 10) invalidNel(new IllegalArgumentException("name too long")) else valid(s)
     }
   }
 }
