@@ -1,7 +1,7 @@
 import scalaz.\/
 import cats.data.Xor
 
-object Either {
+object Ex_Either {
   object vanilla {
     def flatMap(e1: Either[String, Int], e2: Either[String, Int]): Either[String, Int] =
       for {

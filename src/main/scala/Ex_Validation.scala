@@ -3,21 +3,21 @@ import cats.data.ValidatedNel
 import scala.util.{Failure, Success, Try}
 import scalaz._
 
-object Validation {
+object Ex_Validation {
 
   case class Person(age: Int, name: String)
 
   object vanilla {
 
     object Person {
-      def apply(age: String, name: String): Try[Validation.Person] = {
+      def apply(age: String, name: String): Try[Ex_Validation.Person] = {
         val tryAge = validateAge(age)
         val tryName = validateName(name)
 
         tryAge match {
           case Success(age) =>
             tryName match {
-              case Success(name) => Success(Validation.Person(age, name))
+              case Success(name) => Success(Ex_Validation.Person(age, name))
               case Failure(e2) => Failure(e2)
             }
           case Failure(e1) =>

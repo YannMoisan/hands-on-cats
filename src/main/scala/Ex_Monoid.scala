@@ -1,4 +1,4 @@
-object Monoid {
+object Ex_Monoid {
   object vanilla {
     def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = {
       val keys = m1.keys ++ m2.keys

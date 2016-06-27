@@ -1,4 +1,4 @@
-object Sequence {
+object Ex_Sequence {
 
   object vanilla {
     def sequence(s: Seq[Option[Int]]): Option[Seq[Int]] = {

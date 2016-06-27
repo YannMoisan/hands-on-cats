@@ -1,7 +1,7 @@
 import scalaz._
 import cats.data.{Reader=>CReader}
 
-object Reader {
+object Ex_Reader {
   trait Dao { def name = "Ahoy" }
 
   object vanilla {

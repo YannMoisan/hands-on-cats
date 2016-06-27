@@ -1,7 +1,7 @@
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-object FutureOption {
+object Ex_FutureOption {
   // def findAmountById(id: String) : Future[Option[Int]]
 
   object vanilla {
