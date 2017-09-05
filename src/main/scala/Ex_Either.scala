@@ -13,7 +13,6 @@ object Ex_Either {
   }
 
   object _cats {
-    import cats.data.Xor
-    def flatMap(e1: Xor[String, Int], e2: Xor[String, Int]): Xor[String, Int] = sys.error("todo")
+    def flatMap(e1: Either[String, Int], e2: Either[String, Int]): Either[String, Int] = sys.error("todo")
   }
 }
