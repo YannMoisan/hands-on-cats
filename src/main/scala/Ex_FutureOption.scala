@@ -32,7 +32,7 @@ object Ex_FutureOption {
 
   object _cats {
     import cats.data.OptionT
-    import cats.std.future._
+    import cats.instances.future._
     def flatMap(fo1: Future[Option[Int]], fo2: Future[Option[Int]]): Future[Option[Int]] =
       (for {
         i1 <- OptionT(fo1)

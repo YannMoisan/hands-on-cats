@@ -40,11 +40,14 @@ object Ex_Sequence {
   }
 
   object _cats {
-    import cats.implicits._
+    import cats.syntax.traverse._
+    import cats.instances.list._
+    import cats.instances.option._
+    import cats.instances.either._
 
     def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
 
-    def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequenceU
+    def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequence
   }
 
 }
