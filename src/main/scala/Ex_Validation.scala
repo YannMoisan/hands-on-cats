@@ -54,7 +54,7 @@ object Ex_Validation {
     import cats.implicits._
 
     object Person {
-      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = (validateAge(age) |@| validateName(name)).map(Ex_Validation.Person.apply)
+      def apply(age: String, name: String): ValidatedNel[Throwable, Person] = (validateAge(age), validateName(name)).mapN(Ex_Validation.Person.apply)
 
       def validateAge(s: String): ValidatedNel[Throwable, Int] = catchNonFatal(s.toInt).toValidatedNel
 
