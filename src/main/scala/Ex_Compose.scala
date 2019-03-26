@@ -5,7 +5,13 @@ object Ex_Compose {
   }
 
   object _cats {
+    import cats._
+    import cats.data.Nested
+    import cats.implicits._
+
     def double(f: List[Option[Int]]) : List[Option[Int]] =
-      sys.error("todo")
+      Nested(f).map(_*2).value
+      // or
+      // Functor[List].compose(Functor[Option]).map(f)(_*2)
   }
 }
