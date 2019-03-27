@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cats 101</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+        code {
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            padding: 2px 4px;
+        }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Cats - 101
+
+---
+
+## Cats is a library which provides abstractions for functional programming in the Scala programming language.
+
+It's like design patterns in the FP world.
+
+---
+
+# Extension methods
+
+to fix some design mistakes in Scala
+
+## Option
+
+```
+Some(1) // Some(Int)
+1.some  // Option(Int)
+```
+
+## Either
+
+right biaised `Either` for 2.11
+
+---
+
+# Type classes
+
+Reminder : Type classes are a powerful tool used in functional programming to enable ad-hoc polymorphism, more commonly known as overloading.
+
+Cats rely heavily on type classes
+
+IntelliJ : Show Implicit Hints
+
+---
+
+# Getting started
+
+Add to your `build.sbt`
+
+```
+scalacOptions += "-Ypartial-unification"
+libraryDependencies += "org.typelevel" %% "cats-core" % "1.6.0"
+```
+
+```
+import cats._
+import cats.implicits._
+```
+
+---
+
+# Semigroup
+
+```
+trait Semigroup[A] {
+  def combine(x: A, y: A): A
+}
+```
+
+```
+Semigroup[Int].combine(1, 2)
+```
+
+```
+1 |+| 2
+```
+
+---
+
+# Monoid
+
+```
+trait Monoid[A] extends Semigroup[A] {
+  def empty: A
+}
+```
+
+---
+
+# Laws
+
+- `combine` must be associative
+- `empty` must be the identity element
+
+---
+
+# Examples ?
+
+---
+
+# Derivation
+
+Given any type `A` and `B`
+
+When there are a `Monoid[A]` and `Monoid[B]` instances
+
+Then we can derive a `Monoid[(A, B)]` instance
+
+```
+implicit def deriveMonoid[A0, A1]
+  (implicit A0: Monoid[A0], A1: Monoid[A1]): Monoid[(A0, A1)] =
+    new Monoid[(A0, A1)] {
+      def combine(x: (A0, A1), y: (A0, A1)): (A0, A1) =
+        (A0.combine(x._1, y._1), A1.combine(x._2, y._2))
+      def empty: (A0, A1) = 
+        (A0.empty, A1.empty)
+    }
+```
+
+---
+
+# Why ?
+
+
+```
+def combineAll[A](l: List[A])(implicit m: Monoid[A]) = 
+  l.foldLeft(m.empty)(m.combine)
+
+combineAll(List(1,2,3))        // 6
+combineAll(List("1","2","3"))  // "123"
+combineAll(List((1,2), (3,4))) // (4,6)
+```
+
+---
+
+# Type constructors
+
+A type constructor is a type to which you have to supply an other type to get back a new type.
+
+- `List` is a type constructor (declare with `List[_]`)
+- `List[Int]` or `List[A]` is a type
+
+---
+
+# Functor
+
+Apply a function to a value wrapped in a context
+
+```
+trait Functor[F[_]] {
+  def map[A, B](fa: F[A])(f: A => B): F[B]
+}
+```
+
+---
+
+# Why ?
+
+```
+def double[F[Int]: Functor](f: F[Int]) = f.map(_*2)
+
+double(List(1,2,3)) // List(2, 4, 6)
+double(Option(5)) // Some(10)
+```
+
+---
+
+# Applicative
+
+Apply a function that takes two arguments to two wrapped values
+
+```
+trait Applicative[F[_]] extends Functor[F] {
+  def product[A, B](fa: F[A], fb: F[B]): F[(A, B)]
+
+  def pure[A](a: A): F[A]
+}
+```
+
+```
+trait Applicative[F[_]] extends Functor[F] {
+  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
+
+  def pure[A](a: A): F[A]
+
+  def map[A, B](fa: F[A])(f: A => B): F[B] = ap(pure(f))(fa)
+}
+```
+
+```
+Applicative[Option].product(Some(1), Some(2))
+```
+
+```
+(Option(1), Option(2)).mapN(_ + _)
+```
+
+---
+
+# Monad
+
+Apply a function that returns a wrapped value to a wrapped value
+
+```
+trait Monad[F[_]] extends Applicative[F] {
+  def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B]
+}
+```
+
+---
+
+# Composition
+
+Functor and applicative compose
+
+i.e. for any given functors `F` and `G`, `F[G]` is also functor !
+
+Monad do not compose
+
+---
+
+# Monad transformer
+
+## OptionT (Data Types)
+
+`OptionT[F[_], A]` is a light wrapper on an `F[Option[A]]`
+
+---
+
+# Traverse
+
+`F[G[A]]` to `G[F[A]]`
+
+```
+trait Traverse[F[_]] {
+  def traverse[G[_]: Applicative, A, B](fa: F[A])(f: A => G[B]): G[F[B]]
+}
+```
+
+---
+
+# Validated
+
+## What's wrong
+
+```
+def errors[A] = for {
+  e1 <- Left[String, A]("error1")
+  e2 <- Left[String, A]("error2")
+} yield (e1, e2)
+```
+
+---
+
+# Validated (Data Types)
+
+option, either are monads so sequence operation and fail fast.
+
+To accumulate errors
+
+```
+sealed abstract class Validated[+E, +A]
+final case class Valid[+A](a: A) extends Validated[Nothing, A]
+final case class Invalid[+E](e: E) extends Validated[E, Nothing]
+```
+
+---
+
+# NonEmptyList (Data Types)
+
+```
+def errors[A] = (invalidNel("error1"), invalidNel("error2")).mapN(Tuple2.apply)
+```
+
+---
+
+# There are a lot more …
+
+[cats infographic](https://typelevel.org/cats/typeclasses.html#type-classes-in-cats)
+
+---
+
+# Links
+
+- [Cats documentation](https://typelevel.org/cats/)
+- [Scala with Cats Book](https://underscore.io/books/scala-with-cats/)
+- [Scala exercises - Cats](https://www.scala-exercises.org/cats)
+- [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
+- [Anatomy of semigroups and monoids](http://geekocephale.com/blog/2018/11/06/semi-monoid)
+- [Herding Cats](http://eed3si9n.com/herding-cats/)
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'scala',
+          highlightLines: true
+        });
+    </script>
+  </body>
+</html>
