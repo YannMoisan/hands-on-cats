@@ -13,6 +13,9 @@ object Ex_Fold {
   }
 
   object _cats {
-    def fold(l: List[Int]): (Int, Int) = sys.error("todo")
+    import cats._
+    import cats.implicits._
+    def fold(l: List[Int]): (Int, Int) =
+      l.foldMap(e => (1, e))
   }
 }
