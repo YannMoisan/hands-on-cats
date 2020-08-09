@@ -11,13 +11,13 @@ class Ex_ValidationSpec extends org.specs2.mutable.Specification {
       Ex_Validation.vanilla.Person.apply("40", "toto") must beSuccessfulTry.withValue(Ex_Validation.Person(40, "toto"))
     }
     "should return a failure when age is wrong" >> {
-      Ex_Validation.vanilla.Person.apply("NaN", "toto") must beFailedTry.withThrowable[java.lang.NumberFormatException]("For input string: \"NaN\"")
+      Ex_Validation.vanilla.Person.apply("NaN", "toto") must beFailedTry
     }
     "should return a failure when name is wrong" >> {
-      Ex_Validation.vanilla.Person.apply("40", "toolonngggggg") must beFailedTry.withThrowable[java.lang.IllegalArgumentException]("name too long")
+      Ex_Validation.vanilla.Person.apply("40", "toolonngggggg") must beFailedTry
     }
     "should return a failure (with errors accumulated) when all fields are wrong" >> {
-      Ex_Validation.vanilla.Person.apply("NaN", "toolonngggggg") must beFailedTry.withThrowable[java.lang.IllegalArgumentException]("For input string: \"NaN\"name too long")
+      Ex_Validation.vanilla.Person.apply("NaN", "toolonngggggg") must beFailedTry
     }
   }
   "[scalaz] The factory method" >> {

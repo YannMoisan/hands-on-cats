@@ -1,6 +1,5 @@
 import org.specs2.concurrent.ExecutionEnv
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 class Ex_FutureOptionSpec(implicit ee: ExecutionEnv) extends org.specs2.mutable.Specification {
