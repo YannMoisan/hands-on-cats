@@ -1,3 +1,8 @@
+# Note
+
+This repo is archived and is replaced by [hands-on-cats](https://github.com/YannMoisan/hands-on-cats).
+As scalaz has much less traction nowadays, only the cats specific part is maintained.
+
 # Why
 [Scalaz](https://github.com/scalaz/scalaz) is to Scala what Guava is to Java : a must to know library ! But unfortunately, learning scalaz is not so easy.
 
