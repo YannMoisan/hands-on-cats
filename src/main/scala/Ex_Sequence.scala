@@ -24,12 +24,6 @@ object Ex_Sequence {
     }
   }
 
-  object _scalaz {
-    def sequence(s: Seq[Option[Int]]): Option[List[Int]] = sys.error("todo")
-
-    def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = sys.error("todo")
-  }
-
   object _cats {
     def sequence(s: Seq[Option[Int]]): Option[List[Int]] = sys.error("todo")
 

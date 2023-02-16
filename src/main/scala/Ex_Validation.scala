@@ -32,20 +32,6 @@ object Ex_Validation {
     def validateName(s: String): Try[String] = if (s.length > 10) Failure(new IllegalArgumentException("name too long")) else Success(s)
   }
 
-  object _scalaz {
-    import scalaz._
-
-    object Person {
-      def apply(age: String, name: String): ValidationNel[Throwable, Person] = sys.error("todo")
-
-      def validateAge(s: String): ValidationNel[Throwable, Int] = sys.error("todo")
-
-      def validateName(s: String): ValidationNel[Throwable, String] = sys.error("todo")
-
-    }
-
-  }
-
   object _cats {
     import cats.data.ValidatedNel
 

@@ -7,11 +7,6 @@ object Ex_Either {
       } yield v1 + v2
   }
 
-  object _scalaz {
-    import scalaz.\/
-    def flatMap(e1 : \/[String, Int], e2: \/[String, Int]) : \/[String, Int] = sys.error("todo")
-  }
-
   object _cats {
     def flatMap(e1: Either[String, Int], e2: Either[String, Int]): Either[String, Int] = sys.error("todo")
   }

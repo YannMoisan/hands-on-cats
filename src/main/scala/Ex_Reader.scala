@@ -16,15 +16,6 @@ object Ex_Reader {
     }
   }
 
-  object _scalaz {
-    import scalaz._
-    def service1: Reader[Dao, String] = sys.error("todo")
-    def service2: Reader[Dao, String] = sys.error("todo")
-    def service3: Reader[Dao, String] = sys.error("todo")
-
-    def service(dao: Dao): Seq[String] = sys.error("todo")
-  }
-
   object _cats {
     import cats.data.Reader
     def service1: Reader[Dao, String] = sys.error("todo")
