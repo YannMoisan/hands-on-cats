@@ -16,22 +16,6 @@ object Ex_Reader {
     }
   }
 
-  object _scalaz {
-    import scalaz._
-    import Scalaz._
-
-    def service1: Reader[Dao, String] = Reader { _.name }
-    def service2: Reader[Dao, String] = Reader { _.name }
-    def service3: Reader[Dao, String] = Reader { _.name }
-
-    def service(dao: Dao): Seq[String] =
-      (for {
-        i1 <- service1
-        i2 <- service2
-        i3 <- service3
-      } yield Seq(i1, i2, i3)).run(dao)
-  }
-
   object _cats {
     import cats.data.Reader
 

@@ -1,5 +1,4 @@
-import scalaz._
-import Scalaz._
+import cats.syntax.all._
 
 object Ex_Simple {
   def test[A](a1: A)(a2: A) = println((a1, a2))

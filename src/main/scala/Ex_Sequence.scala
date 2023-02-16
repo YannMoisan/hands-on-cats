@@ -24,21 +24,6 @@ object Ex_Sequence {
     }
   }
 
-  object _scalaz {
-    import scalaz._
-    import Scalaz._
-
-    def sequence(s: Seq[Option[Int]]): Option[List[Int]] = s.toList.sequence
-
-    // Trick : sequenceU (for Unapply) is needed in replacement of sequence to help the compiler
-    // Otherwise, this compilation error is triggered
-    //  [error] /Users/yamo/Projects/hands-on-scalaz/src/main/scala/Sequence.scala:33: polymorphic expression cannot be instantiated to expected type;
-    //  [error]  found   : [G[_], B]G[List[B]]
-    //  [error]  required: Either[String,List[Int]]
-    //  [error]     def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequence
-    def sequenceEither(s: Seq[Either[String, Int]]): Either[String, List[Int]] = s.toList.sequenceU
-  }
-
   object _cats {
     import cats.syntax.traverse._
     import cats.instances.list._

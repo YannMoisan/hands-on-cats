@@ -44,16 +44,6 @@ class Ex_MonoidSpec extends org.specs2.mutable.Specification {
       Ex_Monoid.vanilla.mergeEx2(dict1, dict2) must_== dictMerged
     }
   }
-  "[scalaz] merge two maps of Int" >> {
-    "should work when maps don't contains same keys" >> {
-      Ex_Monoid._scalaz.merge(transactions1, transactions2) must_== transactionsMerged
-    }
-  }
-  "[scalaz] merge two dictionaries : maps of List[String]" >> {
-    "should work when maps don't contains same keys" >> {
-      Ex_Monoid._scalaz.mergeEx2(dict1, dict2) must_== dictMerged
-    }
-  }
   "[cats] merge two maps of Int" >> {
     "should work when maps don't contains same keys" >> {
       Ex_Monoid._cats.merge(transactions1, transactions2) must_== transactionsMerged

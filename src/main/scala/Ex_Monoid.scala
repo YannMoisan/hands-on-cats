@@ -11,15 +11,6 @@ object Ex_Monoid {
     }
   }
 
-  object _scalaz {
-    import scalaz._
-    import Scalaz._
-
-    def merge(m1: Map[String, Int], m2: Map[String, Int]): Map[String, Int] = m1 |+| m2
-
-    def mergeEx2(m1: Map[String, List[String]], m2: Map[String, List[String]]): Map[String, List[String]] = m1 |+| m2
-  }
-
   object _cats {
     import cats._
     import cats.implicits._

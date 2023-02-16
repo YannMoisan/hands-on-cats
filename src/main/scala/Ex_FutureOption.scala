@@ -18,18 +18,6 @@ object Ex_FutureOption {
     }
   }
 
-  object _scalaz {
-    import scalaz.OptionT
-    // Trick : this import provide a Monad instance for Future
-    import scalaz.std.scalaFuture._
-
-    def flatMap(fo1: Future[Option[Int]], fo2: Future[Option[Int]]): Future[Option[Int]] =
-      (for {
-        i1 <- OptionT(fo1)
-        i2 <- OptionT(fo2)
-      } yield i1 + i2).run
-  }
-
   object _cats {
     import cats.data.OptionT
     import cats.instances.future._

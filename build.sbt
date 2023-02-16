@@ -1,13 +1,9 @@
-name := """hands-on-scalaz"""
+name := """hands-on-cats"""
 
 version := "1.0"
 
-scalaVersion := "2.12.12"
+scalaVersion := "2.13.10"
 
-scalacOptions += "-Ypartial-unification"
+libraryDependencies += "org.specs2" %% "specs2-core" % "4.19.2" % "test"
 
-libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.17"
-
-libraryDependencies += "org.specs2" %% "specs2-core" % "4.10.2" % "test"
-
-libraryDependencies += "org.typelevel" %% "cats-core" % "2.1.1"
+libraryDependencies += "org.typelevel" %% "cats-core" % "2.9.0"
