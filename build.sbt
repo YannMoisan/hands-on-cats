@@ -2,7 +2,7 @@ name := """hands-on-cats"""
 
 version := "1.0"
 
-scalaVersion := "2.13.10"
+scalaVersion := "2.13.13"
 
 libraryDependencies += "org.specs2" %% "specs2-core" % "4.19.2" % "test"
 
